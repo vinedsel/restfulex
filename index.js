@@ -1,4 +1,5 @@
 const express = require('express');
+const sqlite3 = require('sqlite3').verbose();
 const handlebars = require("express-handlebars").create({
   defaultLayout: 'main'
 });
