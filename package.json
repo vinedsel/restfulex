@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/vinedsel/restfulex/issues"
   },
-  "homepage": "https://github.com/vinedsel/restfulex#readme"
+  "homepage": "https://github.com/vinedsel/restfulex#readme",
+  "dependencies": {
+    "node": "^9.11.0"
+  }
 }
