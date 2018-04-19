@@ -13,6 +13,8 @@ const sequelize = new Sequelize('database', 'username', null, {
 
 const app = express();
 
+const cors = require("cors");
+
 const db = new sqlite3.Database("./Chinook_Sqlite_AutoIncrementPKs.sqlite");
 
 app.use(require("body-parser")());
