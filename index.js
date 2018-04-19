@@ -20,8 +20,46 @@ app.use(require("body-parser")());
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
+// app.get('/view', cors(), function (req, res) {
+//   res.send("This route is CORS enabled!");
+// });
+
 
 // CODE BLOCKS
+
+// // Get all artists
+// app.get("/api/v1/artists", (req, res) => {
+//   req.getConnection((err, connection) => {
+//     const query = connection.query("SELECT * FROM Artist", (err, rows) => {
+//       if (err) return res.send(500, "Error occurred: database error.");
+//       res.json(
+//         rows.map(artist => {
+//           return {
+//             ArtistId: artist.ArtistId,
+//             Name: artist.Name
+//           };
+//         })
+//       );
+//     });
+//   });
+// });
+//
+// // Get single Artist by Id
+// app.get("/api/v1/artists/:id", (req, res) => {
+//   req.getConnection((err, connection) => {
+//     const query = connection.query(
+//       "SELECT * FROM Artist WHERE ArtistId=1",
+//       (err, artist) => {
+//         if (err) return res.send(500, "Error occurred: database error.");
+//         res.json({
+//           ArtistId: artist.ArtistId,
+//           Name: artist.Name
+//         });
+//       }
+//     );
+//   });
+// });
+
 
 const Artist = sequelize.define(
   "Artist", {
@@ -63,9 +101,7 @@ const Album = sequelize.define(
       });
   });
 
-app.get('/view', cors(), function (req, res) {
-  res.send("This route is CORS enabled!");
-});
+
 
 
 app.listen(process.env.PORT || 3000, () => {
