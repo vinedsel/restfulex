@@ -87,20 +87,48 @@ const Album = sequelize.define(
     timestamps: false
   });
 
-  Artist.hasMany(Album, {foreignKey: 'ArtistId'});
-  Album.belongsTo(Artist, {foreignKey: 'ArtistId'});
-    app.get('/', (req, res) => {
-      Album.findAll({
-          include: [
-              {
-                  model: Artist
-              }
-          ]
-      }).then(albums => {
-          res.render('view', {results: albums})
-      });
-  });
+Artist.hasMany(Album, {
+  foreignKey: 'ArtistId'
+});
+Album.belongsTo(Artist, {
+  foreignKey: 'ArtistId'
+});
+// app.get('/', (req, res) => {
+//   Album.findAll({
+//     include: [{
+//       model: Artist
+//     }]
+//   }).then(albums => {
+//     res.render('view', {
+//       results: albums
+//     })
+//   });
+// });
 
+app.get("/", (request, response) => {
+  response.header({
+    DBnumber: 01
+  });
+  if (request.header("music-request") === "album-artist") {
+    Album.findAll({
+      include: [{
+        model: Artist
+      }]
+    }).then(albumArtist => {
+      response.json(albumArtist);
+    });
+  } else if (request.header("music-request") === "album") {
+    Album.findAll().then(albums => {
+      response.json(albums);
+    });
+  } else if (request.header("save-for-reference") === true) {
+    response.render("albums", {
+      responseData: albumArtist
+    });
+  } else {
+    response.send("It's Working!");
+  }
+});
 
 
 
